@@ -4,7 +4,7 @@ on:
     branches: [ "master" ]
     paths:
       - ".github/workflows/gd-type-check.yaml"
-      - 'client/logic/**.gd'
+      - 'client/'
 
 env:
   GODOT_VERSION: 4.2.1
