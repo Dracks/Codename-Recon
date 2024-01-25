@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ "master" ]
     paths:
-      - 'gdlintrc'
+      - ".github/workflows/gd-type-check.yaml"
       - 'client/logic/**.gd'
 
 env:
