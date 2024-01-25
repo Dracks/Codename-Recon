@@ -1,0 +1,35 @@
+name: "godot-ci export"
+on:
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - 'gdlintrc'
+      - 'client/logic/**.gd'
+
+env:
+  GODOT_VERSION: 4.2.1
+  EXPORT_NAME: test-project
+  PROJECT_PATH: test-project
+
+jobs:
+  type-check:
+    name: Check the types in the project
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.2.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Run checks
+        run: |
+        cd client
+        godot --project . --headless --quit 2>&1 | grep SCRIPT -A 1 > ./test_err \;
+        COUNT=$(wc -l test_err)
+        if [ "$COUNT" != "0 test_err" ]; then 
+          cat test_err
+          exit 1
+        fi
