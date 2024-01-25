@@ -2,9 +2,6 @@ name: "godot-ci export"
 on:
   pull_request:
     branches: [ "master" ]
-    paths:
-      - ".github/workflows/gd-type-check.yaml"
-      - 'client/'
 
 env:
   GODOT_VERSION: 4.2.1
