@@ -55,7 +55,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Codename: Recon\n"
-"PO-Revision-Date: 2024-05-24 17:11+0000\n"
+"PO-Revision-Date: 2024-05-26 16:21+0000\n"
 "Last-Translator: Weblate Admin <jaume.singlavalls@gmail.com>\n"
 "Language-Team: Spanish <http://weblate.jaumesingla.es/projects/"
 "codename-recon/codename-recon/es/>\n"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: levels/game.tscn
 msgid "Player 1 Turn"
-msgstr ""
+msgstr "Turno del jugador 1"
 
 #: levels/game.tscn
 #: levels/menu.tscn
