@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - weblate-translations
+  workflow_dispatch:
 
 jobs:
   pull-request:
