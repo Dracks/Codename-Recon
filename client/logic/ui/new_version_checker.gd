@@ -3,11 +3,9 @@ extends Node
 @export var OWNER: String = "Codename-Recon"
 @export var REPO: String = "Codename-Recon"
 @export var current_version_label: Label
-@export var new_version: Button
-@export var open_release : ButtonToUri
-@export var version_label : Label
-#@export var body_text: RichTextLabel
-@export var markdown_text: MarkdownLabel
+
+@onready
+var messages: GlobalMessages = $"/root/Messages"
 
 class Version:
 	var major: int
@@ -79,12 +77,19 @@ func _on_request_completed(result:int, response_code: int, headers: PackedString
 		compare_with_current(last_release, current_version_label.text)
 
 func load_release_data(release_data: Dictionary, version: Version) -> void:
-	new_version.show()
+	var notification_title : String = tr("Version {version} available!", "Notification title for a new version").format({version=release_data.get("tag_name")})
+	var open: ButtonToUri = ButtonToUri.new()
+	open.text = tr("Open", "Open notification in the browser")
+	open.uri_to_go = release_data.get("html_url")
+	var details: Button = Button.new()
+	details.text = tr("More", "Open details of the notification")
+	messages.spawn_notification(notification_title, [open, details], 0)
+	#new_version.show()
 	# print(release_data)
-	version_label.text = release_data.get("tag_name")
+	#version_label.text = release_data.get("tag_name")
 	#body_text.text = release_data.get("body", "No description in the last version")
-	markdown_text.markdown_text = release_data.get("body", "This release doesn't contain any description")
-	open_release.uri_to_go = release_data.get("html_url")
+	#markdown_text.markdown_text = release_data.get("body", "This release doesn't contain any description")
+	#open_release.uri_to_go = release_data.get("html_url")
 	
 		
 func compare_with_current(release_data: Dictionary, current: String) -> void:

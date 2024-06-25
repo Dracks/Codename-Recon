@@ -6,10 +6,8 @@ signal action_done
 var _reload_to_menu: bool = false
 
 @onready var accept_dialog: AcceptDialog = $AcceptDialog
-@onready var notification: Control = $Notification
+@onready var notification: Panel = $Notification
 @onready var notifications_list: VBoxContainer = $NotificationsList
-
-
 
 func spawn(title: String, text: String, reload_to_menu: bool = false) -> void:
 	accept_dialog.title = title
@@ -27,7 +25,10 @@ func spawn_window(title: String, content: Node, buttons: Array[Button]) -> void:
 	pass
 	
 func spawn_notification(title: String, buttons: Array[Button], timeout: int = 0) -> void:
-	var notice: Control = notification.duplicate()
+	var notice: NotificationPanel = notification.duplicate()
+	notice.title = title
+	notice.actions = buttons
+	notice.timeout = timeout
 	notice.show()
 	notifications_list.add_child(notice)
 
